@@ -1,10 +1,11 @@
-import { LogOut, Menu, User, X } from 'lucide-react'
+import { LogOut, Menu, User, X, Moon, Sun } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import NotificationBell from './NotificationBell'
 import { useEventNotifications } from '../hooks/useNotifications'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 
 const navItems = [
   { name: 'Home', to: '/' },
@@ -18,6 +19,7 @@ function Navbar() {
   const [loggingOut, setLoggingOut] = useState(false)
   const { currentUser, logout } = useAuth()
   const { notifyLogout } = useEventNotifications()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
   const navLinkClass = ({ isActive }) =>
@@ -40,12 +42,12 @@ function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-[100] flex h-[60px] items-center justify-between border-b border-[var(--border)] bg-white/80 px-4 sm:px-10 backdrop-blur-md">
+    <nav className="sticky top-0 z-[100] flex h-[64px] items-center justify-between border-b border-[var(--border)] bg-[var(--bg)]/85 px-4 sm:px-12 backdrop-blur-md">
       <Link to="/" className="flex items-center gap-2.5 no-underline">
-        <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center">
-          <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain mix-blend-multiply" />
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[var(--green-border)] bg-[var(--green-bg)] text-base">
+          ⚡
         </div>
-        <span className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">
+        <span className="text-base font-semibold text-[var(--text)]">
           12 Electrons
         </span>
       </Link>
@@ -59,7 +61,7 @@ function Navbar() {
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
 
-      <div className="hidden items-center gap-8 md:flex">
+      <div className="hidden items-center gap-9 md:flex">
         {navItems.map((item) => (
           <NavLink key={item.to} to={item.to} className={navLinkClass} end={item.to === '/'}>
             {item.name}
@@ -67,11 +69,18 @@ function Navbar() {
         ))}
       </div>
 
-      <div className="hidden items-center gap-2.5 md:flex">
+      <div className="hidden items-center gap-3.5 md:flex">
+        <button
+          onClick={toggleTheme}
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg3)] text-[15px] transition-colors hover:border-[var(--border2)] text-[var(--text2)] hover:text-[var(--text)]"
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
         <NotificationBell />
         {currentUser ? (
           <>
-            <span className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs text-[var(--text-primary)]">
+            <span className="inline-flex items-center gap-2 text-[13px] text-[var(--text-secondary)]">
               <User size={14} className="text-[var(--text-tertiary)]" />
               {currentUser.email}
             </span>
@@ -79,7 +88,7 @@ function Navbar() {
               type="button"
               onClick={handleLogout}
               disabled={loggingOut}
-              className="btn-ghost inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-1.5 text-[13px] text-[var(--text-tertiary)] transition-colors hover:bg-[var(--bg3)] hover:text-[var(--text-secondary)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <LogOut size={14} />
               {loggingOut ? 'Logging out...' : 'Logout'}
@@ -87,10 +96,10 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" className="btn-ghost">
+            <Link to="/login" className="text-sm font-medium text-[var(--text2)] transition-colors hover:text-[var(--text)] px-4 py-2">
               Log in
             </Link>
-            <Link to="/signup" className="btn-primary">
+            <Link to="/signup" className="btn-primary py-[10px] px-5 rounded-lg text-sm">
               Get started &rarr;
             </Link>
           </>
@@ -98,7 +107,7 @@ function Navbar() {
       </div>
 
       {open ? (
-        <div className="absolute left-0 right-0 top-[60px] flex flex-col gap-3 border-b border-[var(--border)] bg-white p-4 shadow-lg md:hidden">
+        <div className="absolute left-0 right-0 top-[64px] flex flex-col gap-3 border-b border-[var(--border)] bg-[var(--bg)] p-4 shadow-lg md:hidden">
           <div className="flex flex-col gap-3">
             {navItems.map((item) => (
               <NavLink
@@ -114,6 +123,12 @@ function Navbar() {
           </div>
 
           <div className="mt-2 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+            <button
+              onClick={toggleTheme}
+              className="flex w-full items-center justify-start gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg3)] px-4 py-2 text-[15px] transition-colors hover:border-[var(--border2)] text-[var(--text2)] hover:text-[var(--text)]"
+            >
+              {theme === 'dark' ? <><Sun size={16} /> Light Mode</> : <><Moon size={16} /> Dark Mode</>}
+            </button>
             {currentUser ? (
               <>
                 <span className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)]">

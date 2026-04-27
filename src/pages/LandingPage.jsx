@@ -20,89 +20,114 @@ function LandingPage() {
   return (
     <div className="flex flex-col gap-24 sm:gap-32 pb-24">
       {/* HERO */}
-      <section className="mx-auto mt-8 max-w-7xl px-4 sm:mt-16 sm:px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 items-center">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex flex-col items-start">
-            <motion.div variants={fadeUp} className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--green-border)] bg-[var(--green-bg)] px-3 py-1 text-xs font-medium text-[var(--green)]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--green)] opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--green)]"></span>
-              </span>
-              Live on campus · CMRCET
-            </motion.div>
-            <motion.h1 variants={fadeUp} className="text-4xl font-semibold leading-[1.12] tracking-[-0.03em] text-[var(--navy)] sm:text-5xl lg:text-[52px]">
-              The smarter way to <br/>
-              <span className="relative inline-block">
-                <span className="relative z-10">source</span>
-                <span className="absolute bottom-1.5 left-0 right-0 h-1.5 rounded-full bg-[var(--accent)] opacity-70"></span>
-              </span> electronics
-            </motion.h1>
-            <motion.p variants={fadeUp} className="mt-5 max-w-[420px] text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-              Buy, sell, rent and repair electronics components — all on one trusted campus platform built for students and makers.
-            </motion.p>
-            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-2.5">
-              <Link to="/marketplace" className="btn-primary py-2.5 px-5 text-[15px]">Browse marketplace &rarr;</Link>
-              <Link to="/sell" className="btn-secondary py-2.5 px-5 text-[15px]">List a component</Link>
-            </motion.div>
-            <motion.div variants={fadeUp} className="mt-9 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-[10px] font-bold text-white">AK</div>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-purple-600 text-[10px] font-bold text-white">SR</div>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-emerald-600 text-[10px] font-bold text-white">VR</div>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-red-600 text-[10px] font-bold text-white">PK</div>
-              </div>
-              <span className="text-[13px] text-[var(--text-tertiary)]"><strong className="font-medium text-[var(--text-secondary)]">240+ students</strong> already trading</span>
-            </motion.div>
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-4 py-16 lg:grid-cols-2 lg:items-center lg:py-20 lg:px-12">
+        {/* LEFT */}
+        <div className="relative z-10 flex flex-col items-start">
+          <motion.div variants={fadeUp} className="mb-7 inline-flex items-center gap-2 rounded-full border border-[rgba(0,255,136,0.2)] bg-[var(--green-dim)] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.07em] text-[var(--green)]">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--green)] opacity-75"></span>
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--green)]"></span>
+            </span>
+            Live on campus · CMRCET
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} className="relative z-10 rounded-[14px] border border-[var(--border)] bg-white p-5 shadow-[var(--shadow-lg)]">
-              <div className="mb-3.5 flex items-center justify-between">
-                <span className="rounded-full border border-[var(--accent-border)] bg-[var(--accent-subtle)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">Marketplace · Live</span>
-                <span className="flex items-center gap-1 text-[11px] text-[var(--green)]"><CheckCircle2 size={12} /> Verified</span>
-              </div>
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { icon: '🔌', bg: 'bg-[#eff6ff]', name: 'Arduino Uno R3', price: '₹120', badge: 'Sell', badgeClass: 'bg-[var(--accent-subtle)] text-[var(--accent)] border-[var(--accent-border)]' },
-                  { icon: '📡', bg: 'bg-[#fffbeb]', name: 'Raspberry Pi 4B', meta: '₹80/day', price: '₹80', sub: '/day', badge: 'Rent', badgeClass: 'bg-[var(--amber-bg)] text-[var(--amber)] border-[#fde68a]' },
-                  { icon: '🔧', bg: 'bg-[#fdf4ff]', name: 'ESP32 Dev Board', meta: 'Repair needed', price: '₹60', badge: 'Repair', badgeClass: 'bg-[#fdf4ff] text-[#9333ea] border-[#e9d5ff]' }
-                ].map((item, i) => (
-                  <div key={i} className="flex cursor-pointer items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-2.5 transition-all hover:translate-x-0.5 hover:border-[var(--border-strong)] hover:bg-white hover:shadow-[var(--shadow-sm)]">
-                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${item.bg}`}>{item.icon}</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[13px] font-medium text-[var(--text-primary)]">{item.name}</div>
-                      {item.meta && <div className="mt-0.5 text-[11px] text-[var(--text-tertiary)]">{item.meta}</div>}
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <div className="font-mono text-[13px] font-medium text-[var(--text-primary)]">{item.price}<span className="text-[10px] text-[var(--text-tertiary)]">{item.sub}</span></div>
-                      <span className={`rounded-full border px-1.5 py-[1px] text-[10px] font-medium ${item.badgeClass}`}>{item.badge}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            
-            {/* Background floating card effect */}
-            <div className="absolute inset-[-8px] z-0 rounded-[14px] border border-[var(--border)] bg-[var(--surface)] top-2.5 left-2.5 right-[-8px] bottom-[-8px]"></div>
+          <motion.h1 variants={fadeUp} className="mb-5 text-[36px] font-bold leading-[1.1] tracking-[-0.03em] text-[var(--text)] sm:text-[52px]">
+            The smarter way to<br/>
+            <span className="relative inline-block text-[var(--green)]">
+              source electronics
+              <span className="absolute bottom-0.5 left-0 right-0 h-0.5 rounded-full bg-[var(--green)] opacity-30"></span>
+            </span>
+          </motion.h1>
 
-            {/* Floating Elements */}
-            <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }} className="absolute -right-[18px] -top-[18px] z-20 rounded-[10px] border border-[var(--border)] bg-white px-[14px] py-2.5 shadow-[var(--shadow-md)]">
-              <div className="mb-0.5 text-[10px] text-[var(--text-tertiary)]">Parts listed</div>
-              <div className="font-mono text-[18px] font-semibold tracking-[-0.03em] text-[var(--text-primary)] leading-tight">248</div>
-              <div className="text-[10px] font-medium text-[var(--green)]">&uarr; 12 today</div>
-            </motion.div>
+          <motion.p variants={fadeUp} className="mb-9 max-w-[400px] text-[15px] leading-[1.75] text-[var(--text3)]">
+            Buy, sell, rent and repair electronics components — all on one trusted campus platform built for students and makers.
+          </motion.p>
 
-            <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 2.5 }} className="absolute -bottom-[16px] -left-[16px] z-20 flex items-center gap-2 rounded-[10px] border border-[var(--border)] bg-white px-[14px] py-2.5 shadow-[var(--shadow-md)]">
-              <div className="h-2 w-2 rounded-full bg-[var(--green)]"></div>
-              <div className="text-xs text-[var(--text-secondary)]">Listed a DHT22 sensor</div>
-            </motion.div>
+          <motion.div variants={fadeUp} className="mb-10 flex flex-wrap items-center gap-3">
+            <Link to="/marketplace" className="btn-primary">Browse marketplace &rarr;</Link>
+            <Link to="/sell" className="btn-ghost">List a component</Link>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex items-center gap-3">
+            <div className="flex -space-x-2.5">
+              <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-2 border-[var(--bg)] bg-[#3B82F6] text-[10px] font-semibold text-[#E6F1FB]">AK</div>
+              <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-2 border-[var(--bg)] bg-[#8B5CF6] text-[10px] font-semibold text-[#EEEDFE]">SR</div>
+              <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-2 border-[var(--bg)] bg-[#F59E0B] text-[10px] font-semibold text-[#FFF8E1]">VR</div>
+              <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-2 border-[var(--bg)] bg-[#10B981] text-[10px] font-semibold text-[#E1F5EE]">PK</div>
+            </div>
+            <span className="text-[13px] text-[var(--text3)]"><strong className="font-medium text-[var(--text2)]">240+ students</strong> already trading</span>
           </motion.div>
         </div>
+
+        {/* RIGHT PANEL */}
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--bg2)] p-5 sm:p-6">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-[200px] w-[200px] rounded-full bg-[var(--green-dim)] opacity-50 blur-[40px]"></div>
+          
+          <div className="mb-4 flex items-center justify-between">
+            <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--text4)]">Campus Activity</span>
+            <span className="flex items-center gap-1.5 font-mono text-[10px] font-medium tracking-[0.06em] text-[var(--green)]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--green)] opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--green)]"></span>
+              </span>
+              LIVE
+            </span>
+          </div>
+
+          <div className="mb-4.5 grid grid-cols-3 gap-2">
+            <div className="rounded-[10px] border border-[rgba(255,255,255,0.04)] bg-[var(--bg3)] p-3 text-center transition-colors hover:border-[var(--border2)]">
+              <div className="mb-1 font-mono text-[22px] font-bold leading-none text-[var(--green)]">248</div>
+              <div className="text-[9px] uppercase tracking-[0.08em] text-[var(--text4)]">Parts listed</div>
+            </div>
+            <div className="rounded-[10px] border border-[rgba(255,255,255,0.04)] bg-[var(--bg3)] p-3 text-center transition-colors hover:border-[var(--border2)]">
+              <div className="mb-1 font-mono text-[22px] font-bold leading-none text-[var(--blue)]">12</div>
+              <div className="text-[9px] uppercase tracking-[0.08em] text-[var(--text4)]">Today</div>
+            </div>
+            <div className="rounded-[10px] border border-[rgba(255,255,255,0.04)] bg-[var(--bg3)] p-3 text-center transition-colors hover:border-[var(--border2)]">
+              <div className="mb-1 font-mono text-[22px] font-bold leading-none text-[var(--text)]">43</div>
+              <div className="text-[9px] uppercase tracking-[0.08em] text-[var(--text4)]">Rentals</div>
+            </div>
+          </div>
+
+          <div className="mb-2.5 text-[9px] font-medium uppercase tracking-[0.12em] text-[var(--text4)]">Recent listings</div>
+
+          <div className="flex flex-col gap-2">
+            {[
+              { icon: '🔌', type: 'sell', name: 'Arduino Uno R3', meta: '2 min ago · AK', price: '₹120', badge: 'Sell', iconClass: 'bg-[var(--green-dim)]', priceClass: 'text-[var(--green)]', badgeClass: 'bg-[var(--green-dim)] text-[var(--green)]' },
+              { icon: '🍓', type: 'rent', name: 'Raspberry Pi 4B', meta: '8 min ago · SR', price: '₹80', per: '/day', badge: 'Rent', iconClass: 'bg-[var(--blue-dim)]', priceClass: 'text-[var(--blue)]', badgeClass: 'bg-[var(--blue-dim)] text-[var(--blue)]' },
+              { icon: '🔧', type: 'repair', name: 'ESP32 Dev Board', meta: '15 min ago · VR', price: '₹60', badge: 'Repair', iconClass: 'bg-[var(--orange-dim)]', priceClass: 'text-[var(--orange)]', badgeClass: 'bg-[var(--orange-dim)] text-[var(--orange)]' },
+              { icon: '📡', type: 'sell', name: 'NodeMCU ESP8266', meta: '22 min ago · PK', price: '₹90', badge: 'Sell', iconClass: 'bg-[var(--green-dim)]', priceClass: 'text-[var(--green)]', badgeClass: 'bg-[var(--green-dim)] text-[var(--green)]' }
+            ].map((item, i) => (
+              <div key={i} className="flex cursor-default items-center gap-2.5 rounded-[10px] border border-[rgba(255,255,255,0.04)] bg-[var(--bg3)] p-2.5 transition-all hover:border-[var(--border2)] hover:bg-[rgba(255,255,255,0.02)]">
+                <div className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg text-[15px] ${item.iconClass}`}>{item.icon}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="truncate whitespace-nowrap text-[12.5px] font-medium leading-[1.4] text-[#D1D5DB]">{item.name}</div>
+                  <div className="mt-0.5 font-mono text-[10px] text-[var(--text4)]">{item.meta}</div>
+                </div>
+                <div className="flex shrink-0 flex-col items-end text-right">
+                  <div className={`font-mono text-[13px] font-semibold leading-[1.3] ${item.priceClass}`}>{item.price}{item.per && <span className="text-[9px] font-normal text-[var(--text4)]">{item.per}</span>}</div>
+                  <span className={`mt-1 inline-block rounded uppercase tracking-[0.08em] px-[7px] py-0.5 text-[8px] font-semibold ${item.badgeClass}`}>{item.badge}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Ticker */}
+          <div className="mt-4 overflow-hidden border-t border-[rgba(255,255,255,0.05)] pt-3">
+            <div className="flex animate-ticker gap-9 whitespace-nowrap hover:[animation-play-state:paused]">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex gap-9">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--green)]"></span>DHT22 Sensor listed · ₹35</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--blue)]"></span>OLED Display rented · ₹20/day</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--orange)]"></span>L298N Driver needs fix · ₹40</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--green)]"></span>NodeMCU listed · ₹90</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--blue)]"></span>Servo Motor rented · ₹15/day</span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--text4)] transition-colors"><span className="h-1 w-1 shrink-0 rounded-full bg-[var(--orange)]"></span>STM32 board repair · ₹55</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* LOGOS STRIP */}
