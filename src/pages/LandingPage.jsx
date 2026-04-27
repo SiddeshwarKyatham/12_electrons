@@ -99,7 +99,7 @@ function LandingPage() {
 
             <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 2.5 }} className="absolute -bottom-[16px] -left-[16px] z-20 flex items-center gap-2 rounded-[10px] border border-[var(--border)] bg-white px-[14px] py-2.5 shadow-[var(--shadow-md)]">
               <div className="h-2 w-2 rounded-full bg-[var(--green)]"></div>
-              <div className="text-xs text-[var(--text-secondary)]">Priya listed a DHT22 sensor</div>
+              <div className="text-xs text-[var(--text-secondary)]">Listed a DHT22 sensor</div>
             </motion.div>
           </motion.div>
         </div>
@@ -185,6 +185,126 @@ function LandingPage() {
               <h3 className="mb-1 text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">{s.title}</h3>
               <p className="text-[13px] leading-[1.65] text-[var(--text-secondary)]">{s.desc}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FEATURE ROWS */}
+      <section className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8 py-24 space-y-24">
+        {/* Feature 1: Marketplace */}
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+          <div>
+            <div className="mb-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--accent)]">Marketplace</div>
+            <h3 className="mb-3.5 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[var(--navy)] sm:text-[32px]">Verified components, not random listings</h3>
+            <p className="mb-6 text-[15px] leading-[1.75] text-[var(--text-secondary)]">Every part goes through a functional check before it hits the marketplace. No more buying broken components from unknown sellers.</p>
+            <div className="flex flex-col gap-2">
+              {['Functional check on every component', 'Seller ID verified via campus login', 'Photo + spec documentation required', '7-day buyer protection'].map((check, i) => (
+                <div key={i} className="flex items-center gap-2 text-[14px] text-[var(--text-secondary)]">
+                  <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border border-[var(--green-border)] bg-[var(--green-bg)] text-[10px] text-[var(--green)]">✓</div>
+                  {check}
+                </div>
+              ))}
+            </div>
+          </div>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="overflow-hidden rounded-[20px] border border-[var(--border)] bg-white shadow-[var(--shadow-lg)]">
+            <div className="flex items-center gap-2 border-b border-[var(--border)] bg-[var(--surface)] px-4 py-3">
+              <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]"></div>
+              <div className="ml-1 text-[12px] font-medium text-[var(--text-tertiary)]">Marketplace — All components</div>
+            </div>
+            <div className="py-2">
+              {[
+                { icon: '🔌', bg: 'bg-[#eff6ff]', name: 'Arduino Uno R3', sub: 'Verified · ECE Dept', price: '₹120', badge: 'Sell', badgeClass: 'bg-[var(--accent-subtle)] text-[var(--accent)] border-[var(--accent-border)]' },
+                { icon: '📡', bg: 'bg-[#fffbeb]', name: 'Raspberry Pi 4B (2GB)', sub: 'Verified · CS Dept', price: '₹80/day', badge: 'Rent', badgeClass: 'bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border-strong)]' },
+                { icon: '💡', bg: 'bg-[#fdf4ff]', name: 'NeoPixel LED Strip (1m)', sub: 'Verified · Mech Dept', price: '₹220', badge: 'Sell', badgeClass: 'bg-[var(--accent-subtle)] text-[var(--accent)] border-[var(--accent-border)]' }
+              ].map((item, i) => (
+                <div key={i} className="flex cursor-pointer items-center gap-3 border-b border-[var(--border)] px-4 py-2.5 transition-colors hover:bg-[var(--surface)] last:border-0">
+                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[var(--border)] text-[14px] ${item.bg}`}>{item.icon}</div>
+                  <div className="flex-1">
+                    <div className="text-[13px] font-medium text-[var(--text-primary)]">{item.name}</div>
+                    <div className="text-[11px] text-[var(--text-tertiary)]">{item.sub}</div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="font-mono text-[13px] font-medium text-[var(--text-primary)]">{item.price}</div>
+                    <span className={`rounded-full border px-2 py-[2px] text-[10px] font-medium ${item.badgeClass}`}>{item.badge}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Feature 2: Repair */}
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+          <div className="order-2 lg:order-1">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="overflow-hidden rounded-[20px] border border-[var(--border)] bg-white shadow-[var(--shadow-lg)]">
+              <div className="flex items-center gap-2 border-b border-[var(--border)] bg-[var(--surface)] px-4 py-3">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></div>
+                <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></div>
+                <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]"></div>
+                <div className="ml-1 text-[12px] font-medium text-[var(--text-tertiary)]">Submit repair request</div>
+              </div>
+              <div className="flex flex-col gap-3 p-5">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[12px] font-medium text-[var(--text-secondary)]">Component name</label>
+                  <input type="text" readOnly value="ESP32 Development Board" className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-[13px] text-[var(--text-primary)] outline-none" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-[12px] font-medium text-[var(--text-secondary)]">Issue type</label>
+                  <input type="text" readOnly value="WiFi module not responding" className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-[13px] text-[var(--text-primary)] outline-none" />
+                </div>
+                <div className="mt-2 flex items-center gap-2.5 rounded-md border border-[var(--green-border)] bg-[var(--green-bg)] p-2.5">
+                  <div className="text-[16px]">✅</div>
+                  <div>
+                    <div className="text-[13px] font-medium text-[var(--green)]">Request received · Estimated 2h 30m</div>
+                    <div className="text-[11px] text-[var(--text-tertiary)]">Technician: Arjun S. · ECE Lab B</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <div className="mb-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--accent)]">Repair</div>
+            <h3 className="mb-3.5 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[var(--navy)] sm:text-[32px]">Get your components fixed, fast</h3>
+            <p className="mb-6 text-[15px] leading-[1.75] text-[var(--text-secondary)]">Submit a repair request in 60 seconds. Campus technicians diagnose and fix your components with a 3-hour average turnaround.</p>
+            <div className="flex flex-col gap-2">
+              {['Free initial diagnostics', '3-hour average turnaround', 'Transparent pricing upfront', '14-day repair warranty'].map((check, i) => (
+                <div key={i} className="flex items-center gap-2 text-[14px] text-[var(--text-secondary)]">
+                  <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border border-[var(--green-border)] bg-[var(--green-bg)] text-[10px] text-[var(--green)]">✓</div>
+                  {check}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-12 text-center">
+          <div className="mb-2.5 font-mono text-[12px] font-medium uppercase tracking-[0.1em] text-[var(--accent)]">Students love it</div>
+          <h2 className="text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[var(--navy)] sm:text-[36px]">Built for the campus community</h2>
+          <p className="mt-3 text-[15px] leading-[1.65] text-[var(--text-secondary)]">From final-year projects to hackathon builds — 12 Electrons has students covered.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {[
+            { quote: '"Found an Arduino Uno for my capstone project in literally 10 minutes. Saved ₹300 compared to the shop near campus."', initials: 'AK', bg: 'bg-[#2563eb]', name: 'Arjun Kumar', role: '4th year, ECE · NITW' },
+            { quote: '"Rented a Raspberry Pi for our semester project for just ₹80/day. No need to buy expensive gear for a 2-week project anymore."', initials: 'SR', bg: 'bg-[#7c3aed]', name: 'Sneha Rao', role: '3rd year, CS · IIT-H' },
+            { quote: '"The repair service fixed my ESP32 in under 3 hours. Free diagnosis + transparent pricing — exactly what we needed on campus."', initials: 'VP', bg: 'bg-[#059669]', name: 'Vikram Prasad', role: '2nd year, EEE · JNTU' }
+          ].map((t, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex flex-col gap-4 rounded-[14px] border border-[var(--border)] bg-white p-6 shadow-[var(--shadow-xs)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]">
+              <div className="flex gap-0.5 text-[13px] text-[#f59e0b]">★★★★★</div>
+              <p className="flex-1 text-[14px] italic leading-[1.7] text-[var(--text-secondary)]">{t.quote}</p>
+              <div className="flex items-center gap-2.5">
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold text-white ${t.bg}`}>{t.initials}</div>
+                <div>
+                  <div className="text-[13px] font-semibold text-[var(--text-primary)]">{t.name}</div>
+                  <div className="text-[12px] text-[var(--text-tertiary)]">{t.role}</div>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>
