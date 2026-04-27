@@ -6,7 +6,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-2">
           <Link to="/" className="inline-flex items-center gap-2.5 no-underline">
-            <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center">
+            <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center">
               <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain mix-blend-multiply" />
             </div>
             <span className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">

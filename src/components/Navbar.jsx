@@ -42,7 +42,7 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-[100] flex h-[60px] items-center justify-between border-b border-[var(--border)] bg-white/80 px-4 sm:px-10 backdrop-blur-md">
       <Link to="/" className="flex items-center gap-2.5 no-underline">
-        <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center">
+        <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center">
           <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain mix-blend-multiply" />
         </div>
         <span className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">
