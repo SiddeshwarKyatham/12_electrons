@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom'
+import { useTheme } from '../../context/ThemeContext'
 
 function Footer() {
+  const { theme } = useTheme()
+
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--surface)] mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-2">
           <Link to="/" className="inline-flex items-center gap-2.5 no-underline">
             <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center">
-              <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain mix-blend-multiply" />
+              <img 
+                src={theme === 'dark' ? '/logo-dark.png' : '/logo.png'} 
+                alt="12 Electrons logo" 
+                className="h-full w-full object-contain mix-blend-multiply dark:mix-blend-normal" 
+              />
             </div>
             <span className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">
               12 Electrons
