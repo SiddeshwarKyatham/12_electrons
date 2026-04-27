@@ -1,25 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  --navy: #0a0f1e;
+  --navy-800: #111827;
+  --navy-600: #1e2d50;
+  --navy-500: #2e4170;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --accent-subtle: #eff6ff;
+  --accent-border: #bfdbfe;
+  --surface: #f8f9fb;
+  --surface-2: #f1f3f6;
+  --white: #ffffff;
+  --border: #e5e8ef;
+  --border-strong: #cbd1dc;
+  --text-primary: #0a0f1e;
+  --text-secondary: #4b5675;
+  --text-tertiary: #8b93ab;
+  --text-muted: #a9b3c8;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --green-border: #bbf7d0;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --shadow-xs: 0 1px 2px rgba(10,15,30,0.06);
+  --shadow-sm: 0 1px 4px rgba(10,15,30,0.08), 0 4px 12px rgba(10,15,30,0.04);
+  --shadow-md: 0 2px 8px rgba(10,15,30,0.08), 0 8px 24px rgba(10,15,30,0.06);
+  --shadow-lg: 0 4px 16px rgba(10,15,30,0.10), 0 16px 48px rgba(10,15,30,0.08);
 }
 
-* {
-  @apply border-slate-700;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply m-0 min-h-screen bg-slate-950 font-body text-slate-100 antialiased;
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.25), transparent 36%),
-    radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.24), transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.2), transparent 32%),
-    linear-gradient(180deg, rgba(2, 6, 23, 1) 0%, rgba(3, 7, 18, 1) 100%);
-  background-attachment: fixed;
+  @apply m-0 min-h-screen bg-white font-sans text-[#0a0f1e] antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
 }
 
 #root {
@@ -27,26 +56,19 @@ body {
 }
 
 @layer components {
-  .glass-panel {
-    @apply rounded-2xl border border-slate-700/50 bg-slate-900/40 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-xl;
+  .btn-ghost {
+    @apply text-sm font-medium text-[var(--text-secondary)] bg-transparent rounded-md px-3.5 py-[7px] cursor-pointer transition-all duration-150 decoration-transparent hover:bg-[var(--surface-2)] hover:text-[var(--text-primary)];
   }
 
-  .section-title {
-    @apply font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl;
+  .btn-primary {
+    @apply inline-flex items-center gap-1.5 text-sm font-medium text-white bg-[var(--navy)] rounded-md px-[18px] py-2 cursor-pointer transition-all duration-150 decoration-transparent hover:bg-[var(--navy-600)] hover:-translate-y-[1px] active:translate-y-0;
+    box-shadow: 0 1px 3px rgba(10,15,30,0.2), 0 0 0 1px rgba(10,15,30,0.08);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 2px 8px rgba(10,15,30,0.25), 0 0 0 1px rgba(10,15,30,0.12);
   }
 
-  .section-copy {
-    @apply mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base;
-  }
-
-  .gradient-heading {
-    @apply bg-gradient-to-r from-cyan-300 via-teal-300 to-sky-300 bg-clip-text font-display text-transparent;
-  }
-
-  .soft-glow {
-    box-shadow:
-      0 0 0 1px rgba(94, 234, 212, 0.15),
-      0 20px 35px -18px rgba(45, 212, 191, 0.55),
-      0 0 90px rgba(6, 182, 212, 0.14);
+  .btn-secondary {
+    @apply inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-primary)] bg-white border border-[var(--border-strong)] rounded-md px-[18px] py-2 cursor-pointer transition-all duration-150 decoration-transparent shadow-[var(--shadow-xs)] hover:bg-[var(--surface)] hover:border-[var(--border)] hover:-translate-y-[1px] hover:shadow-[var(--shadow-sm)];
   }
 }

@@ -13,11 +13,10 @@ import Signup from './pages/Signup'
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
-        <BackgroundEffects />
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+      <div className="relative min-h-screen w-full">
+        <div className="relative z-10 flex min-h-screen flex-col">
           <Navbar />
-          <main className="flex-1 py-8 sm:py-12">
+          <main className="flex-1">
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route

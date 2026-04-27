@@ -1,4 +1,4 @@
-import { LogOut, Menu, User, X, Zap } from 'lucide-react'
+import { LogOut, Menu, User, X } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
@@ -21,8 +21,8 @@ function Navbar() {
   const navigate = useNavigate()
 
   const navLinkClass = ({ isActive }) =>
-    `rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-      isActive ? 'bg-slate-800/80 text-cyan-300' : 'text-slate-300 hover:text-white'
+    `text-sm font-normal transition-colors duration-150 ${
+      isActive ? 'text-[var(--navy)] font-medium' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
     }`
 
   const handleLogout = async () => {
@@ -40,123 +40,116 @@ function Navbar() {
   }
 
   return (
-    <header className="sticky top-4 z-30 pt-4">
-      <nav className="glass-panel soft-glow relative px-4 py-3 sm:px-6">
-        <div className="flex items-center justify-between gap-3">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="rounded-lg bg-cyan-400/20 p-2 text-cyan-300">
-              <Zap size={18} />
-            </span>
-            <span className="font-display text-sm font-semibold tracking-wide text-white sm:text-base">
-              12 Electrons
-            </span>
-          </Link>
+    <nav className="sticky top-0 z-[100] flex h-[60px] items-center justify-between border-b border-[var(--border)] bg-white/80 px-4 sm:px-10 backdrop-blur-md">
+      <Link to="/" className="flex items-center gap-2.5 no-underline">
+        <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center">
+          <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain mix-blend-multiply" />
+        </div>
+        <span className="text-[15px] font-semibold tracking-[-0.02em] text-[var(--navy)]">
+          12 Electrons
+        </span>
+      </Link>
 
-          <button
-            type="button"
-            className="rounded-lg border border-slate-700/60 bg-slate-900/60 p-2 text-slate-200 md:hidden"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Toggle navigation"
-          >
-            {open ? <X size={18} /> : <Menu size={18} />}
-          </button>
+      <button
+        type="button"
+        className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 text-[var(--text-secondary)] md:hidden"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="Toggle navigation"
+      >
+        {open ? <X size={18} /> : <Menu size={18} />}
+      </button>
 
-          <div className="hidden items-center gap-2 md:flex">
+      <div className="hidden items-center gap-8 md:flex">
+        {navItems.map((item) => (
+          <NavLink key={item.to} to={item.to} className={navLinkClass} end={item.to === '/'}>
+            {item.name}
+          </NavLink>
+        ))}
+      </div>
+
+      <div className="hidden items-center gap-2.5 md:flex">
+        <NotificationBell />
+        {currentUser ? (
+          <>
+            <span className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs text-[var(--text-primary)]">
+              <User size={14} className="text-[var(--text-tertiary)]" />
+              {currentUser.email}
+            </span>
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={loggingOut}
+              className="btn-ghost inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <LogOut size={14} />
+              {loggingOut ? 'Logging out...' : 'Logout'}
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="btn-ghost">
+              Log in
+            </Link>
+            <Link to="/signup" className="btn-primary">
+              Get started &rarr;
+            </Link>
+          </>
+        )}
+      </div>
+
+      {open ? (
+        <div className="absolute left-0 right-0 top-[60px] flex flex-col gap-3 border-b border-[var(--border)] bg-white p-4 shadow-lg md:hidden">
+          <div className="flex flex-col gap-3">
             {navItems.map((item) => (
-              <NavLink key={item.to} to={item.to} className={navLinkClass} end={item.to === '/'}>
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={navLinkClass}
+                end={item.to === '/'}
+                onClick={() => setOpen(false)}
+              >
                 {item.name}
               </NavLink>
             ))}
           </div>
 
-          <div className="hidden items-center gap-2 md:flex">
-            <NotificationBell />
+          <div className="mt-2 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
             {currentUser ? (
               <>
-                <span className="inline-flex items-center gap-2 rounded-lg border border-slate-700/60 bg-slate-900/70 px-3 py-2 text-xs text-slate-200">
-                  <User size={14} />
+                <span className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-primary)]">
                   {currentUser.email}
                 </span>
                 <button
                   type="button"
                   onClick={handleLogout}
                   disabled={loggingOut}
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-700/60 bg-slate-900/70 px-3 py-2 text-xs text-slate-200 transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="btn-ghost justify-start px-0 text-left"
                 >
-                  <LogOut size={14} />
                   {loggingOut ? 'Logging out...' : 'Logout'}
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:text-white">
-                  Login
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="btn-ghost justify-start px-0"
+                >
+                  Log in
                 </Link>
                 <Link
                   to="/signup"
-                  className="rounded-lg bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 px-3 py-2 text-sm font-semibold text-slate-950"
+                  onClick={() => setOpen(false)}
+                  className="btn-primary justify-center"
                 >
-                  Signup
+                  Get started &rarr;
                 </Link>
               </>
             )}
           </div>
         </div>
-
-        {open ? (
-          <div className="mt-3 space-y-3 border-t border-slate-700/50 pt-3 md:hidden">
-            <div className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={navLinkClass}
-                  end={item.to === '/'}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.name}
-                </NavLink>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2 border-t border-slate-700/50 pt-3">
-              {currentUser ? (
-                <>
-                  <span className="rounded-lg border border-slate-700/60 bg-slate-900/70 px-3 py-2 text-xs text-slate-200">
-                    {currentUser.email}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    disabled={loggingOut}
-                    className="rounded-lg border border-slate-700/60 bg-slate-900/70 px-3 py-2 text-xs text-slate-200"
-                  >
-                    {loggingOut ? 'Logging out...' : 'Logout'}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/signup"
-                    onClick={() => setOpen(false)}
-                    className="rounded-lg bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 px-3 py-2 text-sm font-semibold text-slate-950"
-                  >
-                    Signup
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        ) : null}
-      </nav>
-    </header>
+      ) : null}
+    </nav>
   )
 }
 
