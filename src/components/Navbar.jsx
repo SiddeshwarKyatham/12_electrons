@@ -44,8 +44,8 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-[100] flex h-[64px] items-center justify-between border-b border-[var(--border)] bg-[var(--bg)]/85 px-4 sm:px-12 backdrop-blur-md">
       <Link to="/" className="flex items-center gap-2.5 no-underline">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[var(--green-border)] bg-[var(--green-bg)] text-base">
-          ⚡
+        <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center">
+          <img src="/logo.png" alt="12 Electrons logo" className="h-full w-full object-contain" />
         </div>
         <span className="text-base font-semibold text-[var(--text)]">
           12 Electrons
