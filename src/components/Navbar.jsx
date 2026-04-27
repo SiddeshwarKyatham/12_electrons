@@ -23,8 +23,10 @@ function Navbar() {
   const navigate = useNavigate()
 
   const navLinkClass = ({ isActive }) =>
-    `text-sm font-normal transition-colors duration-150 ${
-      isActive ? 'text-[var(--navy)] font-medium' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+    `text-sm font-medium transition-colors duration-150 px-3 py-1.5 rounded-md ${
+      isActive 
+        ? 'text-[var(--green)] bg-[var(--green-dim)]' 
+        : 'text-[var(--text2)] hover:text-[var(--text)] hover:bg-[var(--bg3)]'
     }`
 
   const handleLogout = async () => {
