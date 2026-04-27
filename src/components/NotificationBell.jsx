@@ -1,12 +1,10 @@
 import { Bell, Trash2, X } from 'lucide-react'
 import { useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 import { useNotificationStore } from '../context/NotificationContext'
 
 function NotificationBell() {
   const [open, setOpen] = useState(false)
   const [hoveredId, setHoveredId] = useState(null)
-  const [requestingPermission, setRequestingPermission] = useState(false)
   const dropdownRef = useRef(null)
   const { notifications, unreadCount, markAsRead, markAllAsRead, clearNotifications } =
     useNotificationStore()
@@ -29,46 +27,8 @@ function NotificationBell() {
     markAsRead(id)
   }
 
-  const requestNotificationPermission = async () => {
-    if (!('Notification' in window)) {
-      toast.error('Your browser does not support notifications')
-      return
-    }
-
-    if (Notification.permission === 'granted') {
-      setOpen(true)
-      return
-    }
-
-    if (Notification.permission === 'denied') {
-      toast.error('Notification permission denied. Enable it in browser settings.')
-      setOpen(true)
-      return
-    }
-
-    try {
-      setRequestingPermission(true)
-      const permission = await Notification.requestPermission()
-      if (permission === 'granted') {
-        toast.success('Notifications enabled!')
-        setOpen(true)
-      } else if (permission === 'denied') {
-        toast.error('Notification permission denied')
-      }
-    } catch (error) {
-      toast.error('Error requesting notification permission')
-      console.error('Permission request error:', error)
-    } finally {
-      setRequestingPermission(false)
-    }
-  }
-
   const handleBellClick = () => {
-    if (Notification.permission === 'granted') {
-      setOpen((prev) => !prev)
-    } else {
-      requestNotificationPermission()
-    }
+    setOpen((prev) => !prev)
   }
 
   return (
@@ -76,8 +36,7 @@ function NotificationBell() {
       <button
         type="button"
         onClick={handleBellClick}
-        disabled={requestingPermission}
-        className="relative rounded-lg border border-slate-700/60 bg-slate-900/70 p-2 text-slate-200 transition hover:bg-slate-800 hover:text-white disabled:opacity-60 disabled:cursor-not-allowed"
+        className="relative rounded-lg border border-slate-700/60 bg-slate-900/70 p-2 text-slate-200 transition hover:bg-slate-800 hover:text-white"
         aria-label="View notifications"
       >
         <Bell size={18} />
@@ -88,7 +47,7 @@ function NotificationBell() {
         )}
       </button>
 
-      {open && Notification.permission === 'granted' && (
+      {open && (
         <div className="absolute right-0 top-12 z-50 w-80 rounded-xl border border-slate-700/60 bg-slate-900/95 shadow-2xl backdrop-blur-md">
           <div className="flex items-center justify-between border-b border-slate-700/40 px-4 py-3">
             <h3 className="font-display text-sm font-semibold text-white">Notifications</h3>
