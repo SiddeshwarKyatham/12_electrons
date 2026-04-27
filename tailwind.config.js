@@ -10,12 +10,12 @@ export default {
         display: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
-        bg: { DEFAULT: 'var(--bg)', 2: 'var(--bg2)', 3: 'var(--bg3)' },
-        border: { DEFAULT: 'var(--border)', 2: 'var(--border2)' },
-        text: { DEFAULT: 'var(--text)', 2: 'var(--text2)', 3: 'var(--text3)', 4: 'var(--text4)' },
-        green: { DEFAULT: 'var(--green)', dim: 'var(--green-dim)' },
-        blue: { DEFAULT: 'var(--blue)', dim: 'var(--blue-dim)' },
-        orange: { DEFAULT: 'var(--orange)', dim: 'var(--orange-dim)' },
+        bg: { DEFAULT: 'var(--bg)', 2: 'var(--bg2)', 3: 'var(--bg3)', 4: 'var(--bg4)' },
+        border: { DEFAULT: 'var(--border)', 2: 'var(--border2)', 3: 'var(--border3)' },
+        text: { DEFAULT: 'var(--text)', 2: 'var(--text2)', 3: 'var(--text3)', 4: 'var(--text4)', 5: 'var(--text5)' },
+        green: { DEFAULT: 'var(--green)', hover: 'var(--green-hover)', dim: 'var(--green-dim)' },
+        blue: { DEFAULT: 'var(--blue)', hover: 'var(--blue-hover)', dim: 'var(--blue-dim)' },
+        orange: { DEFAULT: 'var(--orange)', hover: 'var(--orange-hover)', dim: 'var(--orange-dim)' },
         // Legacy mappings to keep existing pages working seamlessly
         navy: {
           DEFAULT: 'var(--text)',
