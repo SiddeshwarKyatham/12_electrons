@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12 Electrons — Student Hardware Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --navy: #0a0f1e;
+            --navy-800: #111827;
+            --navy-600: #1e2d50;
+            --navy-500: #2e4170;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --accent-subtle: #eff6ff;
+            --accent-border: #bfdbfe;
+            --surface: #f8f9fb;
+            --surface-2: #f1f3f6;
+            --white: #ffffff;
+            --border: #e5e8ef;
+            --border-strong: #cbd1dc;
+            --text-primary: #0a0f1e;
+            --text-secondary: #4b5675;
+            --text-tertiary: #8b93ab;
+            --text-muted: #a9b3c8;
+            --green: #16a34a;
+            --green-bg: #f0fdf4;
+            --green-border: #bbf7d0;
+            --amber: #d97706;
+            --amber-bg: #fffbeb;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --shadow-xs: 0 1px 2px rgba(10, 15, 30, 0.06);
+            --shadow-sm: 0 1px 4px rgba(10, 15, 30, 0.08), 0 4px 12px rgba(10, 15, 30, 0.04);
+            --shadow-md: 0 2px 8px rgba(10, 15, 30, 0.08), 0 8px 24px rgba(10, 15, 30, 0.06);
+            --shadow-lg: 0 4px 16px rgba(10, 15, 30, 0.10), 0 16px 48px rgba(10, 15, 30, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── NOISE TEXTURE ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            height: 60px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-mark {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo-mark img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .nav-logo-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-ghost {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface-2);
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+            background: var(--navy);
+            border: none;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.18s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 3px rgba(10, 15, 30, 0.2), 0 0 0 1px rgba(10, 15, 30, 0.08);
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-600);
+            box-shadow: 0 2px 8px rgba(10, 15, 30, 0.25), 0 0 0 1px rgba(10, 15, 30, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            background: var(--white);
+            border: 1px solid var(--border-strong);
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            border-color: var(--border);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 96px 2.5rem 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 99px;
+            margin-bottom: 20px;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(0.85);
+            }
+        }
+
+        .hero-h1 {
+            font-size: clamp(36px, 4.5vw, 52px);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            margin-bottom: 18px;
+        }
+
+        .hero-h1 .underline-accent {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-h1 .underline-accent::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 420px;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .hero-social-proof {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-avatars {
+            display: flex;
+        }
+
+        .hero-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            margin-left: -8px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .hero-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .hero-proof-text {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        .hero-proof-text strong {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card-stack {
+            position: relative;
+        }
+
+        .product-card-main {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .product-card-back {
+            position: absolute;
+            inset: 10px -8px -8px 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            z-index: 1;
+        }
+
+        .pc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .pc-tag {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-subtle);
+            border: 1px solid var(--accent-border);
+            padding: 3px 8px;
+            border-radius: 99px;
+        }
+
+        .pc-verified {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--green);
+        }
+
+        .pc-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pc-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .pc-item:hover {
+            background: var(--white);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(2px);
+        }
+
+        .pc-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .pc-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .pc-item-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .pc-item-meta {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 1px;
+        }
+
+        .pc-item-price {
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .pc-item-badge {
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 99px;
+            font-weight: 500;
+        }
+
+        .badge-rent {
+            background: var(--amber-bg);
+            color: var(--amber);
+            border: 1px solid #fde68a;
+        }
+
+        .badge-sell {
+            background: var(--accent-subtle);
+            color: var(--accent);
+            border: 1px solid var(--accent-border);
+        }
+
+        .badge-repair {
+            background: #fdf4ff;
+            color: #9333ea;
+            border: 1px solid #e9d5ff;
+        }
+
+        /* floating mini cards */
+        .float-card {
+            position: absolute;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            box-shadow: var(--shadow-md);
+            z-index: 4;
+        }
+
+        .float-stat {
+            top: -18px;
+            right: -18px;
+            animation: floatAlt 6s ease-in-out infinite 1s;
+        }
+
+        .float-activity {
+            bottom: -16px;
+            left: -16px;
+            animation: floatAlt 6s ease-in-out infinite 2.5s;
+        }
+
+        @keyframes floatAlt {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .fc-label {
+            font-size: 10px;
+            color: var(--text-tertiary);
+            margin-bottom: 2px;
+        }
+
+        .fc-val {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .fc-sub {
+            font-size: 10px;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        .fc-activity-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .fc-activity-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ── LOGOS STRIP ── */
+        .logos-strip {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            padding: 20px 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logos-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-right: 12px;
+        }
+
+        .college-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .chip-mark {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            max-width: 1100px;
+            margin: 64px auto 0;
+            padding: 0 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-cell {
+            background: var(--white);
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-val {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            color: var(--navy);
+            font-family: 'DM Mono', monospace;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-weight: 400;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            color: var(--green);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* ── SECTION COMMON ── */
+        section {
+            max-width: 1100px;
+            margin: 96px auto 0;
+            padding: 0 2.5rem;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .section-h {
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .section-sub {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        /* ── SERVICES ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 28px;
+            cursor: pointer;
+            transition: background 0.15s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .service-card:hover {
+            background: var(--surface);
+        }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: var(--surface);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .service-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .service-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .service-link {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: gap 0.15s;
+        }
+
+        .service-link:hover {
+            gap: 8px;
+        }
+
+        /* ── HOW IT WORKS ── */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: calc(12.5% + 20px);
+            right: calc(12.5% + 20px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-border), var(--border), var(--accent-border));
+            z-index: 0;
+        }
+
+        .step-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── FEATURE ROWS ── */
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            padding: 64px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-row:first-child {
+            border-top: none;
+        }
+
+        .feature-row.reverse .feature-visual {
+            order: -1;
+        }
+
+        .feature-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .feature-h {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--navy);
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .feature-p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        .feature-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .feature-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .check-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
+            color: var(--green);
+        }
+
+        /* Feature visuals */
+        .feature-visual {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            background: var(--white);
+        }
+
+        .fv-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .fv-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .fv-title {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-left: 4px;
+            font-weight: 500;
+        }
+
+        .listing-rows {
+            padding: 8px 0;
+        }
+
+        .listing-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.1s;
+            cursor: pointer;
+        }
+
+        .listing-row:last-child {
+            border-bottom: none;
+        }
+
+        .listing-row:hover {
+            background: var(--surface);
+        }
+
+        .lr-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .lr-info {
+            flex: 1;
+        }
+
+        .lr-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .lr-sub {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        .lr-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .lr-price {
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .repair-form {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rf-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .rf-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .rf-input {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color 0.15s;
+            width: 100%;
+        }
+
+        .rf-input:focus {
+            border-color: var(--accent-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .rf-select {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color 0.15s;
+            width: 100%;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b93ab' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+
+        .rf-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+        }
+
+        .rf-status-icon {
+            font-size: 16px;
+        }
+
+        .rf-status-text {
+            font-size: 13px;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        .rf-status-sub {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .testi-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-xs);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: box-shadow 0.15s, transform 0.15s;
+        }
+
+        .testi-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .testi-stars {
+            display: flex;
+            gap: 2px;
+            color: #f59e0b;
+            font-size: 13px;
+        }
+
+        .testi-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            flex: 1;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testi-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .testi-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .testi-role {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* ── CTA BANNER ── */
+        .cta-banner {
+            margin: 96px auto;
+            padding: 0 2.5rem;
+            max-width: 1100px;
+        }
+
+        .cta-inner {
+            background: var(--navy);
+            border-radius: var(--radius-xl);
+            padding: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-inner::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: 20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(125, 211, 252, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .cta-h {
+            font-size: 32px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .cta-sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            line-height: 1.65;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cta-primary {
+            background: #fff;
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-cta-primary:hover {
+            background: var(--surface);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta-sec {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-cta-sec:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 2.5rem 32px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+        }
+
+        .footer-brand-desc {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            line-height: 1.7;
+            margin-top: 12px;
+            max-width: 240px;
+        }
+
+        .footer-col-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 2.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer-mono {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ── ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a class="nav-logo" href="#">
+            <div class="nav-logo-mark"><img src="logo.png" alt="12 Electrons logo" /></div>
+            <span class="nav-logo-text">12 Electrons</span>
+        </a>
+        <div class="nav-links">
+            <a href="#">Marketplace</a>
+            <a href="#">Rent</a>
+            <a href="#">Repair</a>
+            <a href="#">Sell</a>
+        </div>
+        <div class="nav-actions">
+            <a href="#" class="btn-ghost">Log in</a>
+            <a href="#" class="btn-primary">Get started →</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-left">
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                Live on campus · CMRCET
+            </div>
+            <h1 class="hero-h1">
+                The smarter way to
+                <span class="underline-accent">source</span>
+                electronics
+            </h1>
+            <p class="hero-sub">
+                Buy, sell, rent and repair electronics components — all on one trusted campus platform built for
+                students and makers.
+            </p>
+            <div class="hero-ctas">
+                <a href="#" class="btn-primary" style="padding: 10px 22px; font-size: 15px;">Browse marketplace →</a>
+                <a href="#" class="btn-secondary" style="padding: 10px 22px; font-size: 15px;">List a component</a>
+            </div>
+            <div class="hero-social-proof">
+                <div class="hero-avatars">
+                    <div class="hero-avatar" style="background:#2563eb;">AK</div>
+                    <div class="hero-avatar" style="background:#7c3aed;">SR</div>
+                    <div class="hero-avatar" style="background:#059669;">VR</div>
+                    <div class="hero-avatar" style="background:#dc2626;">PK</div>
+                </div>
+                <span class="hero-proof-text"><strong>240+ students</strong> already trading on campus</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card-stack">
+                <div class="product-card-back"></div>
+                <div class="product-card-main">
+                    <div class="pc-header">
+                        <span class="pc-tag">Marketplace · Live</span>
+                        <span class="pc-verified">✓ Verified</span>
+                    </div>
+                    <div class="pc-items">
+                        <div class="pc-item">
+                            <div class="pc-item-icon" style="background:#eff6ff;">🔌</div>
+                            <div class="pc-item-info">
+                                <div class="pc-item-name">Arduino Uno R3</div>
+                                <div class="pc-item-meta"></div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+                                <div class="pc-item-price">₹120</div>
+                                <span class="pc-item-badge badge-sell">Sell</span>
+                            </div>
+                        </div>
+                        <div class="pc-item">
+                            <div class="pc-item-icon" style="background:#fffbeb;">📡</div>
+                            <div class="pc-item-info">
+                                <div class="pc-item-name">Raspberry Pi 4B</div>
+                                <div class="pc-item-meta">₹80/day</div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+                                <div class="pc-item-price">₹80<span
+                                        style="font-size:10px;color:var(--text-tertiary);font-family:'DM Sans';">/day</span>
+                                </div>
+                                <span class="pc-item-badge badge-rent">Rent</span>
+                            </div>
+                        </div>
+                        <div class="pc-item">
+                            <div class="pc-item-icon" style="background:#fdf4ff;">🔧</div>
+                            <div class="pc-item-info">
+                                <div class="pc-item-name">ESP32 Dev Board</div>
+                                <div class="pc-item-meta">Repair needed · WiFi module</div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+                                <div class="pc-item-price">₹60</div>
+                                <span class="pc-item-badge badge-repair">Repair</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-card float-stat">
+                    <div class="fc-label">Parts listed</div>
+                    <div class="fc-val">248</div>
+                    <div class="fc-sub">↑ 12 today</div>
+                </div>
+                <div class="float-card float-activity">
+                    <div class="fc-activity-row">
+                        <div class="fc-dot"></div>
+                        <div class="fc-activity-text">Priya listed a DHT22 sensor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGOS -->
+    <div class="logos-strip">
+        <span class="logos-label">Trusted By Student communities</span>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-cell">
+            <div class="stat-val">248</div>
+            <div class="stat-label">Components listed</div>
+            <div class="stat-change">↑ 18% this week</div>
+        </div>
+        <div class="stat-cell">
+            <div class="stat-val">94%</div>
+            <div class="stat-label">Verified sellers</div>
+            <div class="stat-change">↑ Quality score</div>
+        </div>
+        <div class="stat-cell">
+            <div class="stat-val">₹420</div>
+            <div class="stat-label">Average savings</div>
+            <div class="stat-change">vs retail price</div>
+        </div>
+        <div class="stat-cell">
+            <div class="stat-val">3hr</div>
+            <div class="stat-label">Avg. repair time</div>
+            <div class="stat-change">↓ 24% faster</div>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="fade-up">
+        <div class="section-label">What we offer</div>
+        <h2 class="section-h">Everything your hardware workflow needs</h2>
+        <p class="section-sub">From sourcing affordable parts to short-term rentals and expert repairs — one campus
+            platform.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔌</div>
+                <div class="service-title">Buy &amp; Sell</div>
+                <div class="service-desc">List spare components from your lab drawer or find affordable parts at a
+                    fraction of retail price.</div>
+                <a href="#" class="service-link">Browse listings →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📡</div>
+                <div class="service-title">Rent</div>
+                <div class="service-desc">Borrow high-value gear for short-term projects and semester prototypes. Daily
+                    or weekly rates.</div>
+                <a href="#" class="service-link">View rentals →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <div class="service-title">Repair</div>
+                <div class="service-desc">Get diagnostics and repair support for fragile and critical components from
+                    verified campus technicians.</div>
+                <a href="#" class="service-link">Request repair →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">♻️</div>
+                <div class="service-title">Upcycle</div>
+                <div class="service-desc">Give old electronics new life through structured refurbishment flows — reduce
+                    waste, earn credits.</div>
+                <a href="#" class="service-link">Learn more →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="fade-up">
+        <div class="section-label">Process</div>
+        <h2 class="section-h">Up and trading in minutes</h2>
+        <p class="section-sub">Simple, student-friendly workflow designed for speed and trust.</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-title">Submit</div>
+                <div class="step-desc">List your component with photos, specs, and your asking price. Takes under 2
+                    minutes.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-title">Verify</div>
+                <div class="step-desc">Our campus team performs a quick functional check and tags the listing as
+                    verified.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-title">Connect</div>
+                <div class="step-desc">Buyers browse verified listings and contact you directly through the platform.
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <div class="step-title">Get paid</div>
+                <div class="step-desc">Exchange on campus, confirm delivery, and receive payment — safe and tracked.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE ROWS -->
+    <section>
+        <div class="feature-row">
+            <div class="feature-copy">
+                <div class="feature-label">Marketplace</div>
+                <h3 class="feature-h">Verified components, not random listings</h3>
+                <p class="feature-p">Every part goes through a functional check before it hits the marketplace. No more
+                    buying broken components from unknown sellers.</p>
+                <div class="feature-checklist">
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> Functional check on every component
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> Seller ID verified via campus login
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> Photo + spec documentation required
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> 7-day buyer protection
+                    </div>
+                </div>
+            </div>
+            <div class="feature-visual">
+                <div class="fv-header">
+                    <div class="fv-dot" style="background:#ff5f57;"></div>
+                    <div class="fv-dot" style="background:#febc2e;"></div>
+                    <div class="fv-dot" style="background:#28c840;"></div>
+                    <div class="fv-title">Marketplace — All components</div>
+                </div>
+                <div class="listing-rows">
+                    <div class="listing-row">
+                        <div class="lr-icon" style="background:#eff6ff;">🔌</div>
+                        <div class="lr-info">
+                            <div class="lr-name">Arduino Uno R3</div>
+                            <div class="lr-sub">Verified · ECE Dept</div>
+                        </div>
+                        <div class="lr-right">
+                            <div class="lr-price">₹120</div>
+                            <span class="pc-item-badge badge-sell">Sell</span>
+                        </div>
+                    </div>
+                    <div class="listing-row">
+                        <div class="lr-icon" style="background:#fffbeb;">📡</div>
+                        <div class="lr-info">
+                            <div class="lr-name">Raspberry Pi 4B (2GB)</div>
+                            <div class="lr-sub">Verified · CS Dept</div>
+                        </div>
+                        <div class="lr-right">
+                            <div class="lr-price">₹80/day</div>
+                            <span class="pc-item-badge badge-rent">Rent</span>
+                        </div>
+                    </div>
+                    <div class="listing-row">
+                        <div class="lr-icon" style="background:#fdf4ff;">💡</div>
+                        <div class="lr-info">
+                            <div class="lr-name">NeoPixel LED Strip (1m)</div>
+                            <div class="lr-sub">Verified · Mech Dept</div>
+                        </div>
+                        <div class="lr-right">
+                            <div class="lr-price">₹220</div>
+                            <span class="pc-item-badge badge-sell">Sell</span>
+                        </div>
+                    </div>
+                    <div class="listing-row">
+                        <div class="lr-icon" style="background:#f0fdf4;">📻</div>
+                        <div class="lr-info">
+                            <div class="lr-name">433MHz RF Transmitter</div>
+                            <div class="lr-sub">Verified · EEE Dept</div>
+                        </div>
+                        <div class="lr-right">
+                            <div class="lr-price">₹45</div>
+                            <span class="pc-item-badge badge-sell">Sell</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-row reverse">
+            <div class="feature-copy">
+                <div class="feature-label">Repair</div>
+                <h3 class="feature-h">Get your components fixed, fast</h3>
+                <p class="feature-p">Submit a repair request in 60 seconds. Campus technicians diagnose and fix your
+                    components with a 3-hour average turnaround.</p>
+                <div class="feature-checklist">
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> Free initial diagnostics
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> 3-hour average turnaround
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> Transparent pricing upfront
+                    </div>
+                    <div class="feature-check">
+                        <div class="check-icon">✓</div> 14-day repair warranty
+                    </div>
+                </div>
+            </div>
+            <div class="feature-visual">
+                <div class="fv-header">
+                    <div class="fv-dot" style="background:#ff5f57;"></div>
+                    <div class="fv-dot" style="background:#febc2e;"></div>
+                    <div class="fv-dot" style="background:#28c840;"></div>
+                    <div class="fv-title">Submit repair request</div>
+                </div>
+                <div class="repair-form">
+                    <div class="rf-field">
+                        <label class="rf-label">Component name</label>
+                        <input class="rf-input" type="text" value="ESP32 Development Board" readonly />
+                    </div>
+                    <div class="rf-field">
+                        <label class="rf-label">Issue type</label>
+                        <select class="rf-select">
+                            <option>WiFi module not responding</option>
+                        </select>
+                    </div>
+                    <div class="rf-field">
+                        <label class="rf-label">Description</label>
+                        <input class="rf-input" type="text" value="Board powers on but WiFi won't connect..."
+                            readonly />
+                    </div>
+                    <div class="rf-status">
+                        <div class="rf-status-icon">✅</div>
+                        <div>
+                            <div class="rf-status-text">Request received · Estimated 2h 30m</div>
+                            <div class="rf-status-sub">Technician: Arjun S. · ECE Lab B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="fade-up">
+        <div class="section-label">Students love it</div>
+        <h2 class="section-h">Built for the campus community</h2>
+        <p class="section-sub">From final-year projects to hackathon builds — 12 Electrons has students covered.</p>
+        <div class="testimonials-grid">
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-text">"Found an Arduino Uno for my capstone project in literally 10 minutes. Saved
+                    ₹300 compared to the shop near campus."</div>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#2563eb;">AK</div>
+                    <div>
+                        <div class="testi-name">Arjun Kumar</div>
+                        <div class="testi-role">4th year, ECE · NITW</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-text">"Rented a Raspberry Pi for our semester project for just ₹80/day. No need to buy
+                    expensive gear for a 2-week project anymore."</div>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#7c3aed;">SR</div>
+                    <div>
+                        <div class="testi-name">Sneha Rao</div>
+                        <div class="testi-role">3rd year, CS · IIT-H</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <div class="testi-text">"The repair service fixed my ESP32 in under 3 hours. Free diagnosis +
+                    transparent pricing — exactly what we needed on campus."</div>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background:#059669;">VP</div>
+                    <div>
+                        <div class="testi-name">Vikram Prasad</div>
+                        <div class="testi-role">2nd year, EEE · JNTU</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+        <div class="cta-inner">
+            <div class="cta-text">
+                <div class="cta-label">Get started today</div>
+                <h2 class="cta-h">Start building smarter,<br>spending less.</h2>
+                <p class="cta-sub">Join 240+ students already trading, renting and repairing on the campus electronics
+                    platform.</p>
+            </div>
+            <div class="cta-actions">
+                <a href="#" class="btn-cta-primary">Browse marketplace →</a>
+                <a href="#" class="btn-cta-sec">Sell a part</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <a class="nav-logo" href="#" style="display:inline-flex;">
+                    <div class="nav-logo-mark"><img src="logo.png" alt="12 Electrons logo" /></div>
+                    <span class="nav-logo-text"> 12 Electrons</span>
+                </a>
+                <p class="footer-brand-desc">A student-first hardware marketplace for buying, selling, renting and
+                    repairing electronics on campus.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Platform</div>
+                <div class="footer-links">
+                    <a href="#">Marketplace</a>
+                    <a href="#">Rent</a>
+                    <a href="#">Repair</a>
+                    <a href="#">Sell</a>
+                    <a href="#">Upcycle</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Campus</div>
+                <div class="footer-links">
+                    <a href="#">Become a seller</a>
+                    <a href="#">Verification</a>
+                    <a href="#">Technician program</a>
+                    <a href="#">Campus rep</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Company</div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">© 2024 12 Electrons. All rights reserved.</span>
+            <span class="footer-mono">v1.0 · Made for students</span>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered fade-up
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Trigger hero elements immediately
+        setTimeout(() => {
+            document.querySelectorAll('.hero-left > *').forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(16px)';
+                el.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
+                requestAnimationFrame(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            });
+        }, 100);
+    </script>
+</body>
+
+</html>
