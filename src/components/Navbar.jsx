@@ -46,7 +46,7 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-[100] flex h-[64px] items-center justify-between border-b border-[var(--border)] bg-[var(--bg)]/85 px-4 sm:px-12 backdrop-blur-md">
       <Link to="/" className="flex items-center gap-2.5 no-underline">
-        <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center">
+        <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-lg dark:logo-glow">
           <img 
             src={theme === 'dark' ? '/logo-dark.png' : '/logo.png'} 
             alt="12 Electrons logo" 

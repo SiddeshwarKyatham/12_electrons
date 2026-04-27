@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { CheckCircle2, Cpu, ShieldCheck, Wrench, Zap, Navigation, Clock, CreditCard, Star } from 'lucide-react'
+import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
+import { GlassCard } from '../components/ui/GlassCard'
 
 // Animation variants
 const fadeUp = {
@@ -44,8 +47,8 @@ function LandingPage() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mb-10 flex flex-wrap items-center gap-3">
-            <Link to="/marketplace" className="btn-primary">Browse marketplace &rarr;</Link>
-            <Link to="/sell" className="btn-ghost">List a component</Link>
+            <Button variant="primary" to="/marketplace">Browse marketplace &rarr;</Button>
+            <Button variant="ghost" to="/sell">List a component</Button>
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex items-center gap-3">
@@ -60,8 +63,9 @@ function LandingPage() {
         </div>
 
         {/* RIGHT PANEL */}
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--bg2)] p-5 sm:p-6">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-[200px] w-[200px] rounded-full bg-[var(--green-dim)] opacity-50 blur-[40px]"></div>
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
+          <Card className="relative overflow-hidden p-5 sm:p-6">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-[200px] w-[200px] rounded-full bg-[var(--green-dim)] opacity-50 blur-[40px]"></div>
           
           <div className="mb-4 flex items-center justify-between">
             <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--text4)]">Campus Activity</span>
@@ -127,6 +131,7 @@ function LandingPage() {
               ))}
             </div>
           </div>
+          </Card>
         </motion.div>
       </section>
 
@@ -149,7 +154,7 @@ function LandingPage() {
             { val: '350+', label: 'Components Traded', change: 'All time' },
             { val: '24h', label: 'Avg Repair Time', change: 'Fast turnaround' },
           ].map((stat, i) => (
-            <motion.div key={i} variants={fadeUp} className="flex flex-col bg-white p-7">
+            <motion.div key={i} variants={fadeUp} className="flex flex-col bg-[var(--bg2)] p-7">
               <div className="font-mono text-[30px] font-semibold leading-none tracking-[-0.04em] text-[var(--navy)]">{stat.val}</div>
               <div className="mt-1 text-[13px] text-[var(--text-tertiary)]">{stat.label}</div>
               <div className="mt-0.5 text-[12px] font-medium text-[var(--green)]">{stat.change}</div>
@@ -173,7 +178,7 @@ function LandingPage() {
             { icon: Wrench, title: 'Campus Repair', desc: 'Hand off broken boards to verified student technicians for quick, affordable fixes.' },
             { icon: Zap, title: 'Upcycle', desc: 'Turn e-waste into opportunity. Trade in dead electronics for spare parts or platform credit.' }
           ].map((s, i) => (
-            <div key={i} className="group flex cursor-pointer flex-col gap-3 bg-white p-7 transition-colors hover:bg-[var(--surface)]">
+            <div key={i} className="group flex cursor-pointer flex-col gap-3 bg-[var(--bg2)] p-7 transition-colors hover:bg-[var(--bg3)]">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--navy)] shadow-[var(--shadow-xs)]">
                 <s.icon size={18} strokeWidth={1.5} />
               </div>

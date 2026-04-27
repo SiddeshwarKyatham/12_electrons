@@ -5,12 +5,11 @@
 @tailwind utilities;
 
 :root {
-  /* Light Mode */
   --bg: #FFFFFF;
   --bg2: #F8FAFC;
   --bg3: #F1F5F9;
   --bg4: #E2E8F0;
-  
+
   --text: #0A0C0F;
   --text2: #374151;
   --text3: #6B7280;
@@ -19,35 +18,17 @@
 
   --border: rgba(0,0,0,0.08);
   --border2: rgba(0,0,0,0.14);
-  --border3: rgba(0,0,0,0.20);
-  
-  /* Brand Colors */
+
   --green: #10B981;
   --green-hover: #059669;
-  --green-dim: rgba(16,185,129,0.12);
-  
+
   --blue: #3DA9FC;
-  --blue-hover: #2563EB;
-  --blue-dim: rgba(61,169,252,0.12);
-  
   --orange: #F59E0B;
-  --orange-hover: #D97706;
-  --orange-dim: rgba(245,158,11,0.12);
   
-  --gradient-primary: linear-gradient(135deg, #10B981, #3DA9FC);
-
-  /* Glows */
-  --green-glow: rgba(16,185,129,0.08);
-  --blue-glow: rgba(61,169,252,0.08);
-
-  /* Legacy mappings */
+  /* Legacy mappings (to keep old pages mostly working while refactoring) */
   --surface: var(--bg2);
   --surface-2: var(--bg3);
   --border-strong: var(--border2);
-  --green-bg: var(--green-dim);
-  --green-border: rgba(16,185,129,0.2);
-  --amber: var(--orange);
-  --amber-bg: var(--orange-dim);
   --navy: var(--text);
   --text-primary: var(--text);
   --text-secondary: var(--text2);
@@ -62,40 +43,25 @@
 }
 
 .dark {
-  /* Dark Mode */
   --bg: #0A0C0F;
   --bg2: #0F1117;
   --bg3: #161A23;
   --bg4: #1F2430;
-  
+
   --text: #F0F2F5;
   --text2: #A1A7B3;
   --text3: #6B7280;
   --text4: #4B5563;
   --text5: #374151;
-  
+
   --border: rgba(255,255,255,0.08);
   --border2: rgba(255,255,255,0.14);
-  --border3: rgba(255,255,255,0.20);
-  
-  /* Brand Colors (Neon Identity) */
+
   --green: #00FF88;
   --green-hover: #00CC6E;
-  --green-dim: rgba(0,255,136,0.12);
-  
-  --blue: #3DA9FC;
-  --blue-hover: #1D4ED8;
-  --blue-dim: rgba(61,169,252,0.12);
-  
-  --orange: #FB923C;
-  --orange-hover: #EA580C;
-  --orange-dim: rgba(251,146,60,0.12);
-  
-  --gradient-primary: linear-gradient(135deg, #00FF88, #3DA9FC);
 
-  /* Glows */
-  --green-glow: rgba(0,255,136,0.08);
-  --blue-glow: rgba(61,169,252,0.08);
+  --blue: #3DA9FC;
+  --orange: #FB923C;
 
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.4);
   --shadow-sm: 0 1px 4px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);
@@ -115,26 +81,42 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, var(--green-glow), transparent 40%),
-              radial-gradient(circle at 80% 80%, var(--blue-glow), transparent 40%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* Light mode glow */
+:root body::before {
+  background: radial-gradient(circle at 20% 20%, rgba(16,185,129,0.08), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(61,169,252,0.08), transparent 40%);
+}
+
+/* Dark mode glow */
+.dark body::before {
+  background: radial-gradient(circle at 20% 20%, rgba(0,255,136,0.08), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(61,169,252,0.08), transparent 40%);
 }
 
 #root {
   @apply min-h-screen relative z-10;
 }
 
-@layer components {
-  .btn-ghost {
-    @apply text-sm font-medium text-[var(--text2)] bg-transparent rounded-lg px-[22px] py-3 cursor-pointer transition-all duration-150 border border-[var(--border2)] hover:border-[var(--text3)] hover:text-[var(--text)] hover:bg-[var(--bg3)];
-  }
+.logo-glow {
+  box-shadow: 0 0 20px rgba(0,255,136,0.2);
+}
 
-  .btn-primary {
-    @apply inline-flex justify-center items-center gap-1.5 text-sm font-semibold text-[#080A0D] bg-[var(--green)] rounded-lg px-6 py-3 cursor-pointer transition-all duration-150 hover:bg-[var(--green-hover)] active:scale-[0.98];
-  }
+h1, h2 {
+  @apply text-[var(--text)];
+}
 
-  .btn-secondary {
-    @apply inline-flex justify-center items-center gap-1.5 text-sm font-medium text-[var(--text)] bg-[var(--bg3)] border border-[var(--border2)] rounded-lg px-6 py-3 cursor-pointer transition-all duration-150 hover:bg-[var(--bg2)] hover:border-[var(--border)] active:scale-[0.98];
-  }
+p {
+  @apply text-[var(--text2)];
+}
+
+small, .meta {
+  @apply text-[var(--text3)];
+}
+
+.disabled {
+  @apply text-[var(--text4)];
 }
